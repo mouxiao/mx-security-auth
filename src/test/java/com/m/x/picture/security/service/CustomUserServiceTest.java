@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @date 2019/8/9
  * @remark
  */
-@Ignore
+//@Ignore
 public class CustomUserServiceTest extends MxSecurityAuthApplicationTests {
 
 
@@ -26,7 +26,7 @@ public class CustomUserServiceTest extends MxSecurityAuthApplicationTests {
     userModel.setAccountNonLocked(true);
     userModel.setCredentialsNonExpired(true);
     userModel.setEnabled(true);
-    userModel.setUsername("admin");
+    userModel.setUsername("mouxiao");
     userModel.setPassword("password");
     userModel.setCreateTime(LocalDateTime.now());
     userModel.setUpdateTime(LocalDateTime.now());

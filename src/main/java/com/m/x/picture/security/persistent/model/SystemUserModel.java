@@ -1,5 +1,6 @@
 package com.m.x.picture.security.persistent.model;
 
+import com.m.x.picture.security.persistent.model.base.CreateHaveVersion;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import javax.persistence.Entity;
@@ -23,12 +24,9 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 @Data
 @Entity
-@Table(name = "SYS_USER")
-public class SystemUserModel implements UserDetails {
+@Table(name = "sys_user")
+public class SystemUserModel extends CreateHaveVersion {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
   private String tenantCode;
   private String username;
   private String password;
@@ -37,19 +35,5 @@ public class SystemUserModel implements UserDetails {
   private boolean accountNonLocked;
   private boolean credentialsNonExpired;
   private boolean enabled;
-  @CreatedDate
-  private LocalDateTime createTime;
-  @CreatedBy
-  private String createUser;
-  @LastModifiedDate
-  private LocalDateTime updateTime;
-  @LastModifiedBy
-  private String updateUser;
-  @Version
-  private Integer version;
 
-  @Override
-  public Collection<? extends GrantedAuthority> getAuthorities() {
-    return null;
-  }
 }

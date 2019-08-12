@@ -33,12 +33,13 @@ CREATE TABLE IF NOT EXISTS `sys_user` (
 																				`update_user` varchar(50) DEFAULT NULL COMMENT '最后修改用户',
 																				`version` int(11) NOT NULL COMMENT '版本',
 																				PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- 正在导出表  picture_auth.sys_user 的数据：~1 rows (大约)
+-- 正在导出表  picture_auth.sys_user 的数据：~0 rows (大约)
 /*!40000 ALTER TABLE `sys_user` DISABLE KEYS */;
 INSERT INTO `sys_user` (`id`, `tenant_code`, `username`, `password`, `status`, `account_non_expired`, `account_non_locked`, `credentials_non_expired`, `enabled`, `create_time`, `create_user`, `update_time`, `update_user`, `version`) VALUES
-(1, 'SYSTEM', 'admin', 'password', 0, 1, 1, 1, 1, '2019-08-12 03:13:08', 'SYSTEM', '2019-08-12 03:13:08', 'SYSTEM', 0);
+(1, 'SYSTEM', 'admin', 'password', 0, 1, 1, 1, 1, '2019-08-12 03:13:08', 'SYSTEM', '2019-08-12 03:13:08', 'SYSTEM', 0),
+(2, 'SYSTEM', 'mouxiao', 'password', 0, 1, 1, 1, 1, '2019-08-12 09:59:39', 'SYSTEM', '2019-08-12 09:59:39', 'SYSTEM', 0);
 /*!40000 ALTER TABLE `sys_user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

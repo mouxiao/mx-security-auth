@@ -2,6 +2,7 @@ package com.m.x.picture.security.service;
 
 import static java.lang.String.format;
 
+import com.m.x.picture.security.mapper.SystemUserMapper;
 import com.m.x.picture.security.persistent.model.QSystemUserModel;
 import com.m.x.picture.security.persistent.model.SystemUserModel;
 import com.m.x.picture.security.persistent.repository.SystemUserRepository;
@@ -26,10 +27,15 @@ public class CustomUserService implements UserDetailsService {
   @Autowired
   JPAQueryFactory jpaQueryFactory;
 
+  @Autowired(required = false)
+  SystemUserMapper systemUserMapper;
+
   @Override
-  public UserDetails loadUserByUsername(String username){
-    return systemUserRepository.findSystemUserModelByUsername(username)
-        .orElseThrow(() -> new UsernameNotFoundException(format("%s not found", username)));
+  public UserDetails loadUserByUsername(String username) {
+    SystemUserModel model = systemUserRepository.findSystemUserModelByUsername(username)
+        .orElseThrow(() -> new UsernameNotFoundException(
+            format("No user found with username '%s'.", username)));
+    return systemUserMapper.toSystemUser(model);
   }
 
   public SystemUserModel save(SystemUserModel userModel) {
