@@ -1,11 +1,8 @@
 package com.m.x.picture.security.persistent.repository;
 
-import com.m.x.picture.security.persistent.model.QSystemUserModel;
 import com.m.x.picture.security.persistent.model.SystemUserModel;
-import com.querydsl.jpa.impl.JPAQueryFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,15 +11,9 @@ import org.springframework.stereotype.Repository;
  * @remark
  */
 @Repository
-public interface SystemUserRepository extends JpaRepository<SystemUserModel, Long>,
-    QuerydslPredicateExecutor<SystemUserModel> {
+public interface SystemUserRepository extends JpaRepository<SystemUserModel, Long> {
 
+  Optional<SystemUserModel> findSystemUserModelByUsername(String username);
 
-  SystemUserModel findSystemUserModelByUsername(String username);
-
-//  default SystemUserModel getSystemUserModelByUsername(String username){
-//    QSystemUserModel userModel = QSystemUserModel.systemUserModel;
-//    return
-//  }
 
 }

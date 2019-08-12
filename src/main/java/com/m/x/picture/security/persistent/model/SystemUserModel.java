@@ -7,12 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.annotation.Version;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -37,8 +37,6 @@ public class SystemUserModel implements UserDetails {
   private boolean accountNonLocked;
   private boolean credentialsNonExpired;
   private boolean enabled;
-  @Version
-  private Integer version;
   @CreatedDate
   private LocalDateTime createTime;
   @CreatedBy
@@ -47,6 +45,8 @@ public class SystemUserModel implements UserDetails {
   private LocalDateTime updateTime;
   @LastModifiedBy
   private String updateUser;
+  @Version
+  private Integer version;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
