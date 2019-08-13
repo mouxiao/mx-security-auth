@@ -1,6 +1,6 @@
 package com.m.x.picture.security.api.dto;
 
-import com.m.x.picture.security.persistent.model.Authority;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -10,14 +10,10 @@ import org.springframework.security.core.GrantedAuthority;
  * @remark
  */
 @Data
+@Builder
 public class SystemAuthority implements GrantedAuthority {
 
   private Long id;
-  private Authority authority;
+  private String authority;
 
-
-  @Override
-  public String getAuthority() {
-    return authority.name();
-  }
 }

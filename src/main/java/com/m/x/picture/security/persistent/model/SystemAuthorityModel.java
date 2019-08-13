@@ -15,7 +15,7 @@ import lombok.Data;
 @Table(name = "sys_authority")
 public class SystemAuthorityModel extends CreateHaveVersion {
 
-  private Authority authority;
+  private String authority;
 
   private String authorityName;
 

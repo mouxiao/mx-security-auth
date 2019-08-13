@@ -2,11 +2,11 @@ package com.m.x.picture.security.service;
 
 import static java.lang.String.format;
 
+import com.m.x.picture.security.api.dto.SystemUser;
 import com.m.x.picture.security.mapper.SystemUserMapper;
 import com.m.x.picture.security.persistent.model.QSystemUserModel;
 import com.m.x.picture.security.persistent.model.SystemUserModel;
 import com.m.x.picture.security.persistent.repository.SystemUserRepository;
-import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,23 +19,25 @@ import org.springframework.stereotype.Service;
  * @remark
  */
 @Service
-public class CustomUserService implements UserDetailsService {
+public class CustomUserService extends BaseService implements UserDetailsService {
 
   @Autowired
   private SystemUserRepository systemUserRepository;
 
-  @Autowired
-  JPAQueryFactory jpaQueryFactory;
-
   @Autowired(required = false)
   SystemUserMapper systemUserMapper;
+
+  @Autowired
+  UserAuthorityService authorityService;
 
   @Override
   public UserDetails loadUserByUsername(String username) {
     SystemUserModel model = systemUserRepository.findSystemUserModelByUsername(username)
         .orElseThrow(() -> new UsernameNotFoundException(
             format("No user found with username '%s'.", username)));
-    return systemUserMapper.toSystemUser(model);
+    SystemUser user = systemUserMapper.toSystemUser(model);
+    user.setAuthorities(authorityService.findAuthorityByUserId(model.getId()));
+    return user;
   }
 
   public SystemUserModel save(SystemUserModel userModel) {
