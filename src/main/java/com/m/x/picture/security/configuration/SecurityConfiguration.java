@@ -39,9 +39,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
 
-    http.authorizeRequests().anyRequest().authenticated()
-        .accessDecisionManager(accessDecisionManager());
-
+    http
+        .authorizeRequests()
+        .antMatchers("/", "/login", "/logout").permitAll()
+        .anyRequest()
+        .authenticated()
+        .accessDecisionManager(accessDecisionManager())
+        .and()
+        .formLogin()
+        .loginPage("/login")
+        .permitAll();
   }
 
 
