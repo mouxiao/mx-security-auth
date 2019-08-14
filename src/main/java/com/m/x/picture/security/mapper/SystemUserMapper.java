@@ -5,6 +5,7 @@ import com.m.x.picture.security.persistent.model.SystemUserModel;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.NullValueCheckStrategy;
+import org.springframework.stereotype.Component;
 
 /**
  * @author xiao.mou_tic
