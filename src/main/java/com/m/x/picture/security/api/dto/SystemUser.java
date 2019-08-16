@@ -1,8 +1,11 @@
 package com.m.x.picture.security.api.dto;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
@@ -27,6 +30,8 @@ public class SystemUser implements UserDetails {
   private LocalDateTime updateTime;
   private String updateUser;
   private Integer version;
+  private List<String> roles;
   private List<SystemAuthority> authorities;
+
 
 }

@@ -2,11 +2,14 @@ package com.m.x.picture.security.service;
 
 import static java.lang.String.format;
 
+import com.m.x.picture.security.api.dto.SystemAuthority;
 import com.m.x.picture.security.api.dto.SystemUser;
 import com.m.x.picture.security.mapper.SystemUserMapper;
 import com.m.x.picture.security.persistent.model.QSystemUserModel;
 import com.m.x.picture.security.persistent.model.SystemUserModel;
 import com.m.x.picture.security.persistent.repository.SystemUserRepository;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -36,7 +39,10 @@ public class CustomUserService extends BaseService implements UserDetailsService
         .orElseThrow(() -> new UsernameNotFoundException(
             format("No user found with username '%s'.", username)));
     SystemUser user = systemUserMapper.toSystemUser(model);
-    user.setAuthorities(authorityService.findAuthorityByUserId(model.getId()));
+    List<SystemAuthority> authorities = authorityService.findAuthorityByUserId(model.getId());
+    user.setAuthorities(authorities);
+    user.setRoles(
+        authorities.stream().map(SystemAuthority::getAuthority).collect(Collectors.toList()));
     return user;
   }
 

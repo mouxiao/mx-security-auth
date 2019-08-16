@@ -33,7 +33,8 @@ public class UserAuthorityService extends BaseService {
         .where(userAuthorityModel.userId.eq(userId));
 
     List<SystemAuthority> authorities = tupleJPAQuery.fetch().stream().map(tuple -> {
-      return SystemAuthority.builder().id(tuple.get(systemAuthorityModel.id))
+      return SystemAuthority.builder()
+          .id(tuple.get(systemAuthorityModel.id))
           .authority(tuple.get(systemAuthorityModel.authority)).build();
     }).collect(Collectors.toList());
     return authorities;
