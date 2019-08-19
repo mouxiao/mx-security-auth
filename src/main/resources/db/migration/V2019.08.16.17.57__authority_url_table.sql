@@ -12,10 +12,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
--- 导出 picture_auth 的数据库结构
-CREATE DATABASE IF NOT EXISTS `picture_auth` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `picture_auth`;
-
 -- 导出  表 picture_auth.authority_url 结构
 CREATE TABLE IF NOT EXISTS `authority_url` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
