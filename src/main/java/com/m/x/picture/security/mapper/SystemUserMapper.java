@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 public interface SystemUserMapper {
 
   @Mapping(target = "authorities", ignore = true)
+  @Mapping(target = "urls", ignore = true)
   SystemUser toSystemUser(SystemUserModel userModel);
 
 }

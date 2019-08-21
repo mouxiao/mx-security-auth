@@ -21,5 +21,9 @@ spring:
 
 
 
-
-
+logging:
+  level:
+    org:
+      springframework:
+        security: trace
+        web: ERROR

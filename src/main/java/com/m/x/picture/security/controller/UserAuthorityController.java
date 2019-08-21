@@ -18,4 +18,9 @@ public class UserAuthorityController {
   public String test() {
     return "get";
   }
+
+  @GetMapping("set")
+  public String set(){
+    return "set";
+  }
 }

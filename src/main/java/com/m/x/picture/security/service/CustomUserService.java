@@ -33,6 +33,9 @@ public class CustomUserService extends BaseService implements UserDetailsService
   @Autowired
   UserAuthorityService authorityService;
 
+  @Autowired
+  AuthorityUrlService authorityUrlService;
+
   @Override
   public UserDetails loadUserByUsername(String username) {
     SystemUserModel model = systemUserRepository.findSystemUserModelByUsername(username)
@@ -43,6 +46,7 @@ public class CustomUserService extends BaseService implements UserDetailsService
     user.setAuthorities(authorities);
     user.setRoles(
         authorities.stream().map(SystemAuthority::getAuthority).collect(Collectors.toList()));
+    user.setUrls(authorityUrlService.getAuthorityUrlByUserId(user.getId()));
     return user;
   }
 

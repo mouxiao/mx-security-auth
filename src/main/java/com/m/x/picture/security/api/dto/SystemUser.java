@@ -32,6 +32,7 @@ public class SystemUser implements UserDetails {
   private Integer version;
   private List<String> roles;
   private List<SystemAuthority> authorities;
+  private List<SystemUrl> urls;
 
 
 }

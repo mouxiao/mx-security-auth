@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @date 2019/8/13
  * @remark
  */
-public class BaseService {
+public abstract class BaseService {
 
   @Autowired
   JPAQueryFactory jpaQueryFactory;

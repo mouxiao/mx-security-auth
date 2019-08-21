@@ -39,6 +39,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Autowired
   private CustomUserService customUserService;
 
+  @Autowired
+  private CustomAccessDecisionVoter customAccessDecisionVoter;
+
 
   /**
    * 基于表单认证
@@ -49,7 +52,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     http
         .authorizeRequests()
         .antMatchers("/", "/login", "/logout").permitAll()
-        .antMatchers("/auth/**").hasRole("ADMIN")
         .anyRequest()
         .authenticated()
         .accessDecisionManager(accessDecisionManager())
@@ -78,15 +80,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     auth.userDetailsService(customUserService);
   }
 
-  private AccessDecisionManager accessDecisionManager() {
+  @Bean
+  public AccessDecisionManager accessDecisionManager() {
     List<AccessDecisionVoter<? extends Object>> decisionVoters
         = Arrays.asList(
         new WebExpressionVoter(),
         new RoleVoter(),
         new AuthenticatedVoter(),
-        new CustomAccessDecisionVoter());
+        customAccessDecisionVoter);
     return new UnanimousBased(decisionVoters);
   }
+
 
   @Bean
   public CookieLocaleResolver localeResolver() {

@@ -1,0 +1,2 @@
+INSERT INTO `system_url` (`id`, `url`, `describe`, `status`, `create_user`, `create_time`, `update_user`, `update_time`, `version`) VALUES
+	(2, '/auth/set', '测试用', 0, 'SYSTEM', '2019-08-21 17:57:35', 'SYSTEM', '2019-08-21 17:57:41', 0);
