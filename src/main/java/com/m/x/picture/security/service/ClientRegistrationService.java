@@ -3,6 +3,7 @@ package com.m.x.picture.security.service;
 import com.m.x.picture.security.mapper.ClientRegistrationMapper;
 import com.m.x.picture.security.persistent.model.ClientRegistrationModel;
 import com.m.x.picture.security.persistent.repository.CustomClientRegistrationRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
@@ -13,7 +14,8 @@ import org.springframework.stereotype.Service;
  * @date 2019/8/22
  * @remark
  */
-@Service
+@Slf4j
+@Service(value = "clientRegistration")
 public class ClientRegistrationService implements ClientRegistrationRepository {
 
     @Autowired

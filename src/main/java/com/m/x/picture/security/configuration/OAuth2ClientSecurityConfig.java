@@ -15,34 +15,32 @@ import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepo
  * @remark
  */
 @Configuration
+@EnableWebSecurity
 public class OAuth2ClientSecurityConfig extends WebSecurityConfigurerAdapter {
 
-  @Autowired
-  ClientRegistrationRepository clientRegistrationRepository;
+    @Autowired
+    @Qualifier(value = "clientRegistration")
+    ClientRegistrationRepository clientRegistrationRepository;
 
-  @Autowired
-  @Qualifier(value = "oAuth2AuthorizedClient")
-  OAuth2AuthorizedClientRepository oAuth2AuthorizedClientRepository;
+    @Autowired
+    @Qualifier(value = "oAuth2AuthorizedClient")
+    OAuth2AuthorizedClientRepository oAuth2AuthorizedClientRepository;
 
-  @Override
-  protected void configure(HttpSecurity http) throws Exception {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
 
-    http
-        .oauth2Client()
-        .clientRegistrationRepository(clientRegistrationRepository)
-        .authorizedClientRepository(oAuth2AuthorizedClientRepository)
+        http
+            .oauth2Client()
+            .clientRegistrationRepository(clientRegistrationRepository)
+            .authorizedClientRepository(oAuth2AuthorizedClientRepository)
 //        .authorizedClientService(this.authorizedClientService())
-        .authorizationCodeGrant();
+            .authorizationCodeGrant();
 //        .authorizationRequestRepository(this.authorizationRequestRepository())
 //        .authorizationRequestResolver(this.authorizationRequestResolver())
 //        .accessTokenResponseClient(this.accessTokenResponseClient());
 
-
-
-
 //    super.configure(http);
-  }
-
+    }
 
 
 }
