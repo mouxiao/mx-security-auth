@@ -13,6 +13,15 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 @Mapper(componentModel = "spring", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface ClientRegistrationMapper {
 
-    ClientRegistration toClientRegistration(ClientRegistrationModel model);
+    default ClientRegistration toClientRegistration(ClientRegistrationModel model){
+        ClientRegistration clientRegistration = ClientRegistration.withRegistrationId(model.getRegistrationId()).build();
+        return clientRegistration;
+    }
+
+
+    default ClientRegistrationModel toClientRegistrationModel(ClientRegistration clientRegistration){
+        ClientRegistrationModel model = ClientRegistrationModel.builder().build();
+        return model;
+    }
 
 }

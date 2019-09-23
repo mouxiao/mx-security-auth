@@ -2,12 +2,16 @@ package com.m.x.picture.security.persistent.model;
 
 import com.m.x.picture.security.persistent.model.base.CreateHaveVersion;
 import java.util.Set;
+import lombok.Builder;
+import lombok.Data;
 
 /**
  * @author xiao.mou_tic
  * @date 2019/8/22
  * @remark
  */
+@Data
+@Builder
 public class ClientRegistrationModel extends CreateHaveVersion {
 
     private String registrationId;

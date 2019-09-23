@@ -15,4 +15,6 @@ public interface CustomClientRegistrationRepository extends
 
     ClientRegistrationModel findByRegistrationId(String registrationId);
 
+    void deleteByRegistrationId(String registrationId);
+
 }
