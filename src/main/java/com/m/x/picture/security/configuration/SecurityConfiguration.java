@@ -5,10 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.io.FileSystemResourceLoader;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.access.AccessDecisionManager;
@@ -23,6 +25,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepository;
 import org.springframework.security.web.access.expression.WebExpressionVoter;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 
@@ -31,6 +35,7 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
  * @remark
  * @date 2019/7/10 0010 22:19
  */
+@Order(1)
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -42,6 +47,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Autowired
   private CustomAccessDecisionVoter customAccessDecisionVoter;
 
+  @Autowired
+  @Qualifier(value = "clientRegistration")
+  ClientRegistrationRepository clientRegistrationRepository;
+
+  @Autowired
+  @Qualifier(value = "oAuth2AuthorizedClient")
+  OAuth2AuthorizedClientRepository oAuth2AuthorizedClientRepository;
 
   /**
    * 基于表单认证
@@ -51,7 +63,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     http
         .authorizeRequests()
-        .antMatchers("/", "/login", "/logout").permitAll()
+        .antMatchers("/", "/login", "/logout","/actuator/health").permitAll()
         .anyRequest()
         .authenticated()
         .accessDecisionManager(accessDecisionManager())
@@ -60,6 +72,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //        .loginPage("/login")
         .defaultSuccessUrl("/index")
         .permitAll();
+
+    http
+        .oauth2Client()
+        .clientRegistrationRepository(clientRegistrationRepository)
+        .authorizedClientRepository(oAuth2AuthorizedClientRepository)
+        .authorizationCodeGrant();
   }
 
 

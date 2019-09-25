@@ -1,7 +1,8 @@
 package com.m.x.picture.security.persistent.model;
 
 import com.m.x.picture.security.persistent.model.base.CreateHaveVersion;
-import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Builder;
 import lombok.Data;
 
@@ -12,13 +13,14 @@ import lombok.Data;
  */
 @Data
 @Builder
+@Entity
+@Table(name = "client_registration")
 public class ClientRegistrationModel extends CreateHaveVersion {
 
     private String registrationId;
     private String clientId;
     private String clientSecret;
     private String redirectUriTemplate;
-    private Set<String> scopes;
     private String authorizationUri;
     private String tokenUri;
     private String userInfoUri;

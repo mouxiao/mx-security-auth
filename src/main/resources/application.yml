@@ -1,3 +1,4 @@
+
 spring:
   profiles:
     active: local
@@ -17,6 +18,8 @@ spring:
     hibernate:
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+  application:
+    name: mx-security-auth
 
 
 
@@ -27,3 +30,5 @@ logging:
       springframework:
         security: trace
         web: ERROR
+server:
+  port: 8088

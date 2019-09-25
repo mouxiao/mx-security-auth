@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepo
  * @date 2019/8/22
  * @remark
  */
+
 @Configuration
 @EnableWebSecurity
 public class OAuth2ClientSecurityConfig extends WebSecurityConfigurerAdapter {

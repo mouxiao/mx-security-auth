@@ -1,0 +1,6 @@
+spring:
+  cloud:
+    consul:
+      discovery:
+        service-name: ${spring.application.name}-${spring.profiles.active}-${spring.cloud.client.ip-address}
+        register: true
