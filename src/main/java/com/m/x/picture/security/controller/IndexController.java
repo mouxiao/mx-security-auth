@@ -1,5 +1,6 @@
 package com.m.x.picture.security.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,10 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class IndexController {
 
+  @Value(value = "${test}")
+  private String value;
 
   @GetMapping({"/", "/index"})
   public String index() {
-    return "index";
+    return "index" + value;
   }
 
 }
