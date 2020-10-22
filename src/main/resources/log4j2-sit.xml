@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <properties>
+        <!-- 文件输出格式 -->
+        <property name="PATTERN">[%d{yyyy-MM-dd HH:mm:ss:SSS z}] %5p %l: %m%n</property>
+        <property name="LOG_HOME">/service/logs/app/sit/reebok-adapter</property>
+        <property name="APP_NAME">mx</property>
+    </properties>
+
+    <appenders>
+        <Console name="CONSOLE" target="system_out">
+            <PatternLayout pattern="${PATTERN}"/>
+        </Console>
+        <!-- error -->
+        <RollingFile name="errorRollingFile" fileName="${LOG_HOME}/error.log"
+          filePattern="${LOG_HOME}/$${date:yyyy-MM}/%d{yyyy-MM-dd}.error.log">
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="500MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+            <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            <JsonLayout locationinfo="true" eventEol="true" compact="true"
+              stacktraceAsString="true" includeStacktrace="true">
+                <KeyValuePair key="timestamp" value="$${date:yyyy-MM-dd HH:mm:ss:SSS}" />
+                <KeyValuePair key="project_name" value="${APP_NAME}" />
+                <KeyValuePair key="trace_id" value="${ctx:traceId}" />
+                <KeyValuePair key="span_id" value="${ctx:spanId}" />
+                <KeyValuePair key="traceId" value="$${tracer:traceId:-}"/>
+                <KeyValuePair key="spanId" value="$${tracer:spanId:-}"/>
+                <KeyValuePair key="segmentId" value="$${tracer:segmentId:-}"/>
+            </JsonLayout>
+        </RollingFile>
+
+        <!-- warn -->
+        <RollingFile name="warnRollingFile" fileName="${LOG_HOME}/warn.log"
+          filePattern="${LOG_HOME}/$${date:yyyy-MM}/%d{yyyy-MM-dd}.warn.log">
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="500MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+            <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
+            <JsonLayout locationinfo="true" eventEol="true" compact="true"
+              stacktraceAsString="true" includeStacktrace="true">
+                <KeyValuePair key="timestamp" value="$${date:yyyy-MM-dd HH:mm:ss:SSS}" />
+                <KeyValuePair key="project_name" value="${APP_NAME}" />
+                <KeyValuePair key="trace_id" value="${ctx:traceId}" />
+                <KeyValuePair key="span_id" value="${ctx:spanId}" />
+                <KeyValuePair key="traceId" value="$${tracer:traceId:-}"/>
+                <KeyValuePair key="spanId" value="$${tracer:spanId:-}"/>
+                <KeyValuePair key="segmentId" value="$${tracer:segmentId:-}"/>
+            </JsonLayout>
+        </RollingFile>
+
+        <!-- info -->
+        <RollingFile name="infoRollingFile" fileName="${LOG_HOME}/info.log"
+          filePattern="${LOG_HOME}/$${date:yyyy-MM}/%d{yyyy-MM-dd}.info.log">
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="500MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <JsonLayout locationinfo="true" eventEol="true" compact="true"
+              stacktraceAsString="true" includeStacktrace="true">
+                <KeyValuePair key="timestamp" value="$${date:yyyy-MM-dd HH:mm:ss:SSS}" />
+                <KeyValuePair key="project_name" value="${APP_NAME}" />
+                <KeyValuePair key="trace_id" value="${ctx:traceId}" />
+                <KeyValuePair key="span_id" value="${ctx:spanId}" />
+                <KeyValuePair key="traceId" value="$${tracer:traceId:-}"/>
+                <KeyValuePair key="spanId" value="$${tracer:spanId:-}"/>
+                <KeyValuePair key="segmentId" value="$${tracer:segmentId:-}"/>
+            </JsonLayout>
+        </RollingFile>
+
+        <!-- debug -->
+        <RollingFile name="debugRollingFile" fileName="${LOG_HOME}/debug.log"
+          filePattern="${LOG_HOME}/$${date:yyyy-MM}/%d{yyyy-MM-dd}.debug.log">
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="500MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+            <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+            <JsonLayout locationinfo="true" eventEol="true" compact="true"
+              stacktraceAsString="true" includeStacktrace="true">
+                <KeyValuePair key="timestamp" value="$${date:yyyy-MM-dd HH:mm:ss:SSS}" />
+                <KeyValuePair key="project_name" value="${APP_NAME}" />
+                <KeyValuePair key="trace_id" value="${ctx:traceId}" />
+                <KeyValuePair key="span_id" value="${ctx:spanId}" />
+                <KeyValuePair key="traceId" value="$${tracer:traceId:-}"/>
+                <KeyValuePair key="spanId" value="$${tracer:spanId:-}"/>
+                <KeyValuePair key="segmentId" value="$${tracer:segmentId:-}"/>
+            </JsonLayout>
+        </RollingFile>
+
+    </appenders>
+
+    <loggers>
+        <!-- warn级别是为了去除mq监听的日志打印 -->
+        <root level="info">
+            <appenderref ref="CONSOLE"/>
+            <appenderref ref="errorRollingFile"/>
+            <appenderref ref="warnRollingFile"/>
+            <appenderref ref="infoRollingFile"/>
+            <appenderref ref="debugRollingFile"/>
+        </root>
+    </loggers>
+
+</configuration>  

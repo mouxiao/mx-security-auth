@@ -13,8 +13,8 @@ import org.springframework.stereotype.Repository;
 public interface CustomClientRegistrationRepository extends
     JpaRepository<ClientRegistrationModel, Long> {
 
-    ClientRegistrationModel findByRegistrationId(String registrationId);
+  ClientRegistrationModel findByRegistrationId(String registrationId);
 
-    void deleteByRegistrationId(String registrationId);
+  void deleteByRegistrationId(String registrationId);
 
 }

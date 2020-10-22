@@ -4,6 +4,7 @@ import com.m.x.picture.security.service.CustomUserService;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ResourceLoaderAware;
@@ -35,6 +36,7 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
  * @remark
  * @date 2019/7/10 0010 22:19
  */
+@Slf4j
 @Order(1)
 @Configuration
 @EnableWebSecurity
@@ -60,10 +62,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
    */
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-
+    log.info("security.............................");
     http
         .authorizeRequests()
-        .antMatchers("/", "/login", "/logout","/actuator/health").permitAll()
+        .antMatchers("/", "/login", "/logout", "/actuator/health", "/oauth/**").permitAll()
         .anyRequest()
         .authenticated()
         .accessDecisionManager(accessDecisionManager())

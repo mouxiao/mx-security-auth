@@ -13,22 +13,28 @@ spring:
     placeholder-replacement: false
   jpa:
     database: mysql
-    show-sql: true
+    show-sql: false
     hibernate:
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
   application:
     name: mx-security-auth
-
-
-
-
-
-logging:
-  level:
-    org:
-      springframework:
-        security: trace
-        web: ERROR
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        security: info
+#        web: ERROR
 server:
   port: 8088
+
+logging:
+  config: classpath:log4j2-dev.xml
+
+
+
+security:
+  user:
+    name: user
+    password: 1234
+

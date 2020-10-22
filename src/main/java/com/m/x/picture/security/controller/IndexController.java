@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class IndexController {
 
-  @Value(value = "${test}")
-  private String value;
+//  @Value(value = "${test}")
+  private String value = "ss";
 
   @GetMapping({"/", "/index"})
   public String index() {
