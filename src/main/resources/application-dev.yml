@@ -19,12 +19,7 @@ spring:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
   application:
     name: mx-security-auth
-#logging:
-#  level:
-#    org:
-#      springframework:
-#        security: info
-#        web: ERROR
+
 server:
   port: 8088
 
