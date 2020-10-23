@@ -1,4 +1,4 @@
-package com.sample;
+package com.m.x.picture.security.persistent.model;
 
 
 import javax.persistence.Entity;
