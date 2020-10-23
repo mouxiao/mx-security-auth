@@ -1,5 +1,6 @@
 package com.m.x.picture.security.persistent.model;
 
+import com.m.x.picture.security.persistent.model.base.CreateHaveVersion;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.Builder;
@@ -14,7 +15,7 @@ import lombok.Data;
 @Builder
 @Entity
 @Table(name = "oauth_client_details")
-public class OauthClientDetails {
+public class OauthClientDetails extends CreateHaveVersion {
 
   private String clientId;
   private String resourceIds;

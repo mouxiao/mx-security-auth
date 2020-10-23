@@ -1,6 +1,7 @@
 package com.m.x.picture.security.persistent.model;
 
 
+import com.m.x.picture.security.persistent.model.base.CreateHaveVersion;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.Builder;
@@ -10,7 +11,7 @@ import lombok.Data;
 @Builder
 @Entity
 @Table(name = "client_details")
-public class ClientDetails {
+public class ClientDetails extends CreateHaveVersion {
 
   private String appId;
   private String resourceIds;

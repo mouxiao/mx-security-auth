@@ -1,68 +1,132 @@
--- used in tests that use HSQL
-create table oauth_client_details (
-  client_id VARCHAR(256) PRIMARY KEY,
-  resource_ids VARCHAR(256),
-  client_secret VARCHAR(256),
-  scope VARCHAR(256),
-  authorized_grant_types VARCHAR(256),
-  web_server_redirect_uri VARCHAR(256),
-  authorities VARCHAR(256),
-  access_token_validity INTEGER,
-  refresh_token_validity INTEGER,
-  additional_information VARCHAR(4096),
-  autoapprove VARCHAR(256)
-);
-
-create table oauth_client_token (
-  token_id VARCHAR(256),
-  token VARCHAR(256),
-  authentication_id VARCHAR(256) PRIMARY KEY,
-  user_name VARCHAR(256),
-  client_id VARCHAR(256)
-);
-
-create table oauth_access_token (
-  token_id VARCHAR(256),
-  token VARCHAR(256),
-  authentication_id VARCHAR(256) PRIMARY KEY,
-  user_name VARCHAR(256),
-  client_id VARCHAR(256),
-  authentication VARCHAR(256),
-  refresh_token VARCHAR(256)
-);
-
-create table oauth_refresh_token (
-  token_id VARCHAR(256),
-  token VARCHAR(256),
-  authentication VARCHAR(256)
-);
-
-create table oauth_code (
-  code VARCHAR(256),
-  authentication VARCHAR(256)
-);
-
-create table oauth_approvals (
-	userId VARCHAR(256),
-	clientId VARCHAR(256),
-	scope VARCHAR(256),
-	status VARCHAR(10),
-	expiresAt TIMESTAMP,
-	lastModifiedAt TIMESTAMP
-);
+CREATE TABLE `client_details` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`appId` VARCHAR(256) NULL DEFAULT NULL,
+	`resourceIds` VARCHAR(256) NULL DEFAULT NULL,
+	`appSecret` VARCHAR(256) NULL DEFAULT NULL,
+	`scope` VARCHAR(256) NULL DEFAULT NULL,
+	`grantTypes` VARCHAR(256) NULL DEFAULT NULL,
+	`redirectUrl` VARCHAR(256) NULL DEFAULT NULL,
+	`authorities` VARCHAR(256) NULL DEFAULT NULL,
+	`access_token_validity` INT(11) NULL DEFAULT NULL,
+	`refresh_token_validity` INT(11) NULL DEFAULT NULL,
+	`additionalInformation` VARCHAR(4096) NULL DEFAULT NULL,
+	`autoApproveScopes` VARCHAR(256) NULL DEFAULT NULL,
+	`create_time` TIMESTAMP NULL DEFAULT NULL,
+	`create_user` VARCHAR(256) NULL DEFAULT NULL,
+	`update_time` TIMESTAMP NULL DEFAULT NULL,
+	`update_user` VARCHAR(256) NULL DEFAULT NULL,
+	`version` INT(11) NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
 
 
--- customized oauth_client_details table
-create table client_details (
-  appId VARCHAR(256) PRIMARY KEY,
-  resourceIds VARCHAR(256),
-  appSecret VARCHAR(256),
-  scope VARCHAR(256),
-  grantTypes VARCHAR(256),
-  redirectUrl VARCHAR(256),
-  authorities VARCHAR(256),
-  access_token_validity INTEGER,
-  refresh_token_validity INTEGER,
-  additionalInformation VARCHAR(4096),
-  autoApproveScopes VARCHAR(256)
-);
+CREATE TABLE `oauth_client_token` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`token_id` VARCHAR(256) NULL DEFAULT NULL,
+	`token` VARCHAR(256) NULL DEFAULT NULL,
+	`authentication_id` VARCHAR(256) NOT NULL,
+	`user_name` VARCHAR(256) NULL DEFAULT NULL,
+	`client_id` VARCHAR(256) NULL DEFAULT NULL,
+	`create_time` TIMESTAMP NULL DEFAULT NULL,
+	`create_user` VARCHAR(256) NULL DEFAULT NULL,
+	`update_time` TIMESTAMP NULL DEFAULT NULL,
+	`update_user` VARCHAR(256) NULL DEFAULT NULL,
+	`version` INT(11) NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `oauth_access_token` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`token_id` VARCHAR(256) NULL DEFAULT NULL,
+	`token` VARCHAR(256) NULL DEFAULT NULL,
+	`authentication_id` VARCHAR(256) NOT NULL,
+	`user_name` VARCHAR(256) NULL DEFAULT NULL,
+	`client_id` VARCHAR(256) NULL DEFAULT NULL,
+	`authentication` VARCHAR(256) NULL DEFAULT NULL,
+	`refresh_token` VARCHAR(256) NULL DEFAULT NULL,
+	`create_time` TIMESTAMP NULL DEFAULT NULL,
+	`create_user` VARCHAR(255) NULL DEFAULT NULL,
+	`update_time` TIMESTAMP NULL DEFAULT NULL,
+	`update_user` DATETIME NULL DEFAULT NULL,
+	`version` INT(255) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE `oauth_approvals` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`userId` VARCHAR(256) NULL DEFAULT NULL,
+	`clientId` VARCHAR(256) NULL DEFAULT NULL,
+	`scope` VARCHAR(256) NULL DEFAULT NULL,
+	`status` VARCHAR(10) NULL DEFAULT NULL,
+	`expiresAt` TIMESTAMP NULL DEFAULT NULL,
+	`lastModifiedAt` TIMESTAMP NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE `oauth_client_details` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`client_id` VARCHAR(256) NOT NULL,
+	`resource_ids` VARCHAR(256) NULL DEFAULT NULL,
+	`client_secret` VARCHAR(256) NULL DEFAULT NULL,
+	`scope` VARCHAR(256) NULL DEFAULT NULL,
+	`authorized_grant_types` VARCHAR(256) NULL DEFAULT NULL,
+	`web_server_redirect_uri` VARCHAR(256) NULL DEFAULT NULL,
+	`authorities` VARCHAR(256) NULL DEFAULT NULL,
+	`access_token_validity` INT(11) NULL DEFAULT NULL,
+	`refresh_token_validity` INT(11) NULL DEFAULT NULL,
+	`additional_information` VARCHAR(4096) NULL DEFAULT NULL,
+	`autoapprove` VARCHAR(256) NULL DEFAULT NULL,
+	`create_time` TIMESTAMP NULL DEFAULT NULL,
+	`create_user` VARCHAR(256) NULL DEFAULT NULL,
+	`update_time` TIMESTAMP NULL DEFAULT NULL,
+	`update_user` VARCHAR(256) NULL DEFAULT NULL,
+	`version` INT(11) NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=2
+;
+
+
+
+CREATE TABLE `oauth_code` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`code` VARCHAR(256) NULL DEFAULT NULL,
+	`authentication` VARCHAR(256) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+CREATE TABLE `oauth_refresh_token` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`token_id` VARCHAR(256) NULL DEFAULT NULL,
+	`token` VARCHAR(256) NULL DEFAULT NULL,
+	`authentication` VARCHAR(256) NULL DEFAULT NULL,
+	`create_time` TIMESTAMP NULL DEFAULT NULL,
+	`create_user` VARCHAR(256) NULL DEFAULT NULL,
+	`update_time` TIMESTAMP NULL DEFAULT NULL,
+	`update_user` VARCHAR(256) NULL DEFAULT NULL,
+	`version` INT(11) NOT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
