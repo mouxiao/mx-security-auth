@@ -3,7 +3,7 @@
     <properties>
         <!-- 文件输出格式 -->
         <property name="PATTERN">[%d{yyyy-MM-dd HH:mm:ss:SSS z}] %5p %l: %m%n</property>
-        <property name="LOG_HOME">/service/logs/app/sit/reebok-adapter</property>
+        <property name="LOG_HOME">/service/logs/app/sit/mx-security-auth</property>
         <property name="APP_NAME">mx</property>
     </properties>
 

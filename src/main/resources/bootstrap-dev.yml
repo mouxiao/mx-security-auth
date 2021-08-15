@@ -1,6 +1,7 @@
 spring:
-  profiles:
-    active: dev #读取配置的分支
+  config:
+    activate: dev #读取配置的分支
+#    import: optional:configserver:http://localhost:8500
   cloud:
     consul:
       host: 127.0.0.1
@@ -8,13 +9,15 @@ spring:
       enabled: true
       config: #####-------配置中心---------
         format: yaml #kv 值读取格式
-        prefix: config
+
         data-key: configuration #读取配置中心的根目录路径
         profile-separator: "," #配置中心的路径的分隔符
         watch:
           wait-time: 5 #当配置中心的参数值变动后，应用多久刷新
         enabled: true #设置config是否被启用
         default-context: mx-security-auth
+        prefixes:
+        - config
       discovery:
         # ${spring.cloud.client.hostname} 当前服务器host 名同一服务注册在consul 中，实例必须区分开~！！！！
         instance-id: m-${spring.cloud.client.hostname}-${spring.application.name}-${spring.cloud.consul.host}-${spring.cloud.consul.port}

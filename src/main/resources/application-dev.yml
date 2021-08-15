@@ -1,6 +1,6 @@
 spring:
-  profiles:
-    active: local
+  config:
+    activate: dev
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/picture_auth?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver

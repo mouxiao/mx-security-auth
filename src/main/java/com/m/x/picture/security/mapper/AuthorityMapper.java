@@ -20,10 +20,10 @@ public interface AuthorityMapper {
   SystemAuthority toSystemAuthority(SystemAuthorityModel model);
 
 
-  @Mapping(target = "id", source = "id")
-  @Mapping(target = "url", source = "url")
-  @Mapping(target = "describe", source = "describe")
-  @Mapping(target = "status", source = "status")
+//  @Mapping(target = "id", source = "id")
+//  @Mapping(target = "url", source = "url")
+//  @Mapping(target = "describe", source = "describe")
+//  @Mapping(target = "status", source = "status")
   SystemUrl toSystemUrl(SystemUrlModel model);
 
   List<SystemUrl> toSystemUrls(List<SystemUrlModel> models);
