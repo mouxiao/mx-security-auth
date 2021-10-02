@@ -75,6 +75,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .defaultSuccessUrl("/index")
         .permitAll();
 
+
+
     http
         .oauth2Client()
         .clientRegistrationRepository(clientRegistrationRepository)
