@@ -82,6 +82,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .clientRegistrationRepository(clientRegistrationRepository)
         .authorizedClientRepository(oAuth2AuthorizedClientRepository)
         .authorizationCodeGrant();
+
+
   }
 
 
