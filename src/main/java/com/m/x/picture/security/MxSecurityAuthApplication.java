@@ -11,6 +11,7 @@ public class MxSecurityAuthApplication {
 
   public static void main(String[] args) {
     SpringApplication.run(MxSecurityAuthApplication.class, args);
+
   }
 
 }
